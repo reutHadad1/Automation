@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@types/selenium-webdriver": "^4.1.26",
+    "@types/webdriverio": "^5.0.0",
+    "@wdio/appium-service": "^9.1.0",
+    "appium": "^2.11.4",
+    "cheerio": "^1.0.0",
+    "ini": "^5.0.0",
+    "selenium-webdriver": "^4.25.0",
+    "sqlite3": "^5.1.7",
+    "wd": "^1.14.0",
+    "webdriverio": "^9.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/cheerio": "^0.22.35",
+    "@types/sqlite3": "^3.1.11"
+  }
+}

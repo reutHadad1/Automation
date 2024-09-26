@@ -34,8 +34,8 @@ class Tracing extends _channelOwner.ChannelOwner {
     this._isTracing = false;
   }
   async start(options = {}) {
-    await this._wrapApiCall(async () => {
-      this._includeSources = !!options.sources;
+    this._includeSources = !!options.sources;
+    const traceName = await this._wrapApiCall(async () => {
       await this._channel.tracingStart({
         name: options.name,
         snapshots: options.snapshots,
@@ -46,16 +46,15 @@ class Tracing extends _channelOwner.ChannelOwner {
         name: options.name,
         title: options.title
       });
-      await this._startCollectingStacks(response.traceName);
+      return response.traceName;
     }, true);
+    await this._startCollectingStacks(traceName);
   }
   async startChunk(options = {}) {
-    await this._wrapApiCall(async () => {
-      const {
-        traceName
-      } = await this._channel.tracingStartChunk(options);
-      await this._startCollectingStacks(traceName);
-    }, true);
+    const {
+      traceName
+    } = await this._channel.tracingStartChunk(options);
+    await this._startCollectingStacks(traceName);
   }
   async _startCollectingStacks(traceName) {
     if (!this._isTracing) {
